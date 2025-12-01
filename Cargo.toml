@@ -1,0 +1,127 @@
+[package]
+name = "xfmail"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["rlib"]
+
+[[bin]]
+name = "egui_app"
+path = "src/egui_app/main.rs"
+
+[[bin]]
+name = "xfcollab-server"
+path = "src/backend/main.rs"
+
+[[bin]]
+name = "debug_db_connection"
+path = "debug_db_connection.rs"
+
+[dependencies]
+# Server dependencies
+axum = { version = "0.8.6", optional = true }
+tokio = { version = "1.48", features = ["full"], optional = true }
+tokio-stream = { version = "0.1.17", optional = true }
+tower = { version = "0.5.2", optional = true }
+tower-http = { version = "0.6.6", features = ["fs"], optional = true }
+futures-util = { version = "0.3.31" }
+log = { version = "0.4.28", optional = true }
+bytes = { version = "1.10.1", optional = true }
+email-lib = "0.26.4"
+
+
+# Serialization
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = "1.0.145"
+toml = "0.8"
+
+# UUID
+uuid = { version = "1.18.1", features = ["v4", "serde", "js"] }
+getrandom = { version = "0.3", features = ["wasm_js"], optional = true }
+
+# Logging
+tracing = "0.1.41"
+tracing-subscriber = { version = "0.3.20", features = ["env-filter", "std"], optional = true }
+console_log = { version = "1.0.0", optional = true }
+console_error_panic_hook = { version = "0.1.7", optional = true }
+
+
+
+# Utilities
+chrono = { version = "0.4.42", features = ["serde"] }
+thiserror = "2.0.17"
+reqwest = { version = "0.12.24", default-features = false, features = ["json", "rustls-tls", "blocking", "stream"] }
+genai = { version = "0.4.3", optional = true }
+dirs = "5.0"
+
+# Database & Auth - Unified SQLite with sqlx only
+sqlx = { version = "0.8.6", features = ["runtime-tokio-native-tls", "postgres", "sqlite", "uuid", "chrono"] }
+# Removed rusqlite to avoid sqlite3 linking conflicts
+bcrypt = { version = "0.17.1", optional = true }
+jsonwebtoken = { version = "10.2.0", features = ["rust_crypto"], optional = true }
+dotenv = { version = "0.15", optional = true }
+
+# Email
+async-imap = { version = "0.9", optional = true }
+async-native-tls = { version = "0.5", optional = true }
+lettre = { version = "0.11", features = ["tokio1-native-tls", "builder"], optional = true }
+mail-parser = { version = "0.9", optional = true }
+
+# UI
+egui = "0.33.2"
+eframe = "0.33.2"
+
+
+# CRDT
+diamond-types = { path = "reference/diamond-types", features = ["serde"] }
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+tokio = { version = "1.48", features = ["rt", "macros", "time", "sync"], default-features = false, optional = true }
+bcrypt = { version = "0.17.1", optional = true }
+jsonwebtoken = { version = "10.2.0", features = ["rust_crypto"], optional = true }
+getrandom = { version = "0.2", features = ["js"], optional = true }
+diamond-types = { path = "reference/diamond-types", features = ["serde"] }
+
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+tokio = { version = "1.48", features = ["full"] }
+
+[features]
+ssr = [
+    "dep:axum",
+    "dep:tokio-stream",
+    "dep:tower",
+    "dep:tower-http",
+    "dep:tracing-subscriber",
+    "dep:log",
+    "dep:bytes",
+    "dep:genai",
+    "dep:bcrypt",
+    "dep:jsonwebtoken",
+    "dep:dotenv",
+    "dep:async-imap",
+    "dep:async-native-tls",
+    "dep:lettre",
+    "dep:mail-parser",
+]
+
+
+
+
+
+[dev-dependencies]
+tokio-test = "0.4.3"
+mockito = "1.2"
+wiremock = "0.6"
+proptest = "1.5"
+assert_matches = "1.5"
+pretty_assertions = "1.4"
+serial_test = "3.0"
+testcontainers = "0.16"
+wasm-bindgen-test = "0.3"
+cucumber = "0.12"
+fantoccini = "0.19"
+criterion = { version = "0.5", features = ["html_reports"] }
+tempfile = "3.10"
+faux = "0.1"
+axum-test = "9.0"

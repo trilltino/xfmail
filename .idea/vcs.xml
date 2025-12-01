@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/reference/axum" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/reference/braid-http" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/reference/braid-spec" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/reference/diamond-types" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/reference/egui" vcs="Git" />
+  </component>
+</project>

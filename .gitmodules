@@ -1,0 +1,15 @@
+[submodule "reference/axum"]
+	path = reference/axum
+	url = https://github.com/tokio-rs/axum.git
+[submodule "reference/braid-spec"]
+	path = reference/braid-spec
+	url = https://github.com/braid-org/braid-spec.git
+[submodule "reference/leptos"]
+	path = reference/leptos
+	url = https://github.com/leptos-rs/leptos.git
+[submodule "reference/braid-http"]
+	path = reference/braid-http
+	url = https://github.com/braid-org/braid-http
+[submodule "reference/diamond-types"]
+	path = reference/diamond-types
+	url = https://github.com/josephg/diamond-types.git
